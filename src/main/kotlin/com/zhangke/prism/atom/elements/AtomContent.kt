@@ -11,9 +11,8 @@ data class AtomContent(
      */
     val type: String = TYPE_TEXT,
     /**
-     * atom:content MAY have a "src" attribute, whose value MUST be an IRI reference [RFC3987].
+     * value MUST be an IRI reference RFC3987.
      * If the "src" attribute is present, atom:content MUST be empty.
-     * Atom Processors MAY use the IRI to retrieve the content and MAY choose to ignore remote content or to present it in a different manner than local content.
      */
     val src: String?,
 ) {
