@@ -1,8 +1,6 @@
 package com.zhangke.prism.atom.attributes
 
-import java.net.URI
-
 data class CommonAttributes(
-    val base: URI?,
+    val base: String?,
     val lang: String?,
 )
