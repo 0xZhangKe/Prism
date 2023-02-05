@@ -1,10 +1,10 @@
 package com.zhangke.atom.constructs
 
-import com.zhangke.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.AtomCommonAttributes
 import java.util.*
 
 data class AtomDate(
-    val commonAttrs: CommonAttributes?,
+    val commonAttrs: AtomCommonAttributes?,
     /**
      * A Date construct is an element whose content MUST conform to the "date-time" production in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339).
      * In addition, an uppercase "T" character MUST be used to separate date and time,

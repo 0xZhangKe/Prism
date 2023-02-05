@@ -1,13 +1,13 @@
 package com.zhangke.atom.constructs
 
-import com.zhangke.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.AtomCommonAttributes
 
 /**
  * A Text construct contains human-readable text, usually in small quantities.
  * The content of Text constructs is Language-Sensitive.
  */
 data class AtomText(
-    val commonAttrs : CommonAttributes?,
+    val commonAttrs : AtomCommonAttributes?,
     val type: String = TYPE_TEXT,
     val value: String?,
 ) {

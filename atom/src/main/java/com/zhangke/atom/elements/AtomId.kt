@@ -1,6 +1,6 @@
 package com.zhangke.atom.elements
 
-import com.zhangke.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.AtomCommonAttributes
 
 /**
  * The "atom:id" element conveys a permanent, universally unique identifier for an entry or feed.
@@ -9,6 +9,6 @@ import com.zhangke.atom.attributes.CommonAttributes
  * Though the IRI might use a dereferencable scheme, Atom Processors MUST NOT assume it can be dereferenced.
  */
 data class AtomId(
-    val commonAttrs: CommonAttributes?,
+    val commonAttrs: AtomCommonAttributes?,
     val value: String,
 )

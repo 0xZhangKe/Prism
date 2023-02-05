@@ -1,6 +1,6 @@
 package com.zhangke.atom.elements
 
-import com.zhangke.atom.attributes.LinkRelation
+import com.zhangke.atom.attributes.AtomLinkRelation
 
 /**
  * The "atom:link" element defines a reference from an entry or feed to a Web resource.
@@ -12,7 +12,7 @@ data class AtomLink(
      * atom:link elements MUST have an href attribute, whose value MUST be a IRI referenceRFC3987.
      */
     val href: String,
-    val rel: LinkRelation?,
+    val rel: AtomLinkRelation?,
     /**
      * On the link element, the "type" attribute's value is an advisory media type: it is a hint about the type of the representation that is
      * expected to be returned when the value of the href attribute is dereferenced.
