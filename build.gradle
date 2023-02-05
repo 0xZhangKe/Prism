@@ -1,21 +1,27 @@
-plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.10'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {url 'https://jitpack.io'}
+        maven {url "https://plugins.gradle.org/m2/"}
+        maven { url 'https://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+    }
 }
 
-group 'com.zhangke.prism'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {url 'https://jitpack.io'}
+        maven {url "https://plugins.gradle.org/m2/"}
+        maven { url 'https://repo1.maven.org/maven2' }
+    }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
-
-test {
-    useJUnitPlatform()
+tasks.register('clean') {
+    delete rootProject.buildDir
 }

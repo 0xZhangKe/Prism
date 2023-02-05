@@ -8,13 +8,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-
 group 'com.zhangke.prism'
 version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
