@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.constructs
+package com.zhangke.atom.constructs
 
-import com.zhangke.prism.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.CommonAttributes
 
 /**
  * A Text construct contains human-readable text, usually in small quantities.

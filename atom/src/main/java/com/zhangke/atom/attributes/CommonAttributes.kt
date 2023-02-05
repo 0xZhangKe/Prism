@@ -1,4 +1,4 @@
-package com.zhangke.prism.atom.attributes
+package com.zhangke.atom.attributes
 
 data class CommonAttributes(
     val base: String?,

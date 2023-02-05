@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.constructs
+package com.zhangke.atom.constructs
 
-import com.zhangke.prism.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.CommonAttributes
 
 /**
  *  A Person construct is an element that describes a person, corporation, or similar entity (hereafter, 'person').

@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.elements
+package com.zhangke.atom.elements
 
-import com.zhangke.prism.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.CommonAttributes
 
 data class AtomContent(
     val commonAttrs: CommonAttributes?,

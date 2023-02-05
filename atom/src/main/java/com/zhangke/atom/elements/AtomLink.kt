@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.elements
+package com.zhangke.atom.elements
 
-import com.zhangke.prism.atom.attributes.LinkRelation
+import com.zhangke.atom.attributes.LinkRelation
 
 /**
  * The "atom:link" element defines a reference from an entry or feed to a Web resource.

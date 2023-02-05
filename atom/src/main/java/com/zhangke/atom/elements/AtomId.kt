@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.elements
+package com.zhangke.atom.elements
 
-import com.zhangke.prism.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.CommonAttributes
 
 /**
  * The "atom:id" element conveys a permanent, universally unique identifier for an entry or feed.

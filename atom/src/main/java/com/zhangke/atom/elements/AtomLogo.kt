@@ -1,6 +1,6 @@
-package com.zhangke.prism.atom.elements
+package com.zhangke.atom.elements
 
-import com.zhangke.prism.atom.attributes.CommonAttributes
+import com.zhangke.atom.attributes.CommonAttributes
 
 /**
  * The "atom:logo" element's content is an IRI reference RFC3987 that identifies an image that provides visual identification for a feed.
