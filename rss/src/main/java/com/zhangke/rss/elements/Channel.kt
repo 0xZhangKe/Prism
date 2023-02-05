@@ -1,4 +1,4 @@
-package com.zhangke.prism.rss.elements
+package com.zhangke.rss.elements
 
 /**
  * The channel element describes the RSS feed, providing such information as its title and description,

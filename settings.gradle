@@ -1,2 +1,5 @@
 rootProject.name = 'Prism'
+include 'rss'
+include 'atom'
+include 'prism'
 

@@ -1,4 +1,4 @@
-package com.zhangke.prism.rss.elements
+package com.zhangke.rss.elements
 
 /**
  * An item's category element identifies a category or tag to which the item belongs (OPTIONAL).

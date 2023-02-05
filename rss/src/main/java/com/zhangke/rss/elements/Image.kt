@@ -1,4 +1,4 @@
-package com.zhangke.prism.rss.elements
+package com.zhangke.rss.elements
 
 /**
  * The image element supplies a graphical logo for the feed (OPTIONAL).
