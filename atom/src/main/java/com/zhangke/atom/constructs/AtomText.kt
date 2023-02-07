@@ -9,7 +9,8 @@ import com.zhangke.atom.attributes.AtomCommonAttributes
 data class AtomText(
     val commonAttrs : AtomCommonAttributes?,
     val type: String = TYPE_TEXT,
-    val value: String?,
+    val text: String?,
+    val xhtmlDiv: String?,
 ) {
 
     companion object {
@@ -22,7 +23,7 @@ data class AtomText(
         const val TYPE_TEXT = "text"
 
         /**
-         * If the value of "type" is "html", the content of the Text construct MUST NOT contain child elements and SHOULD be suitable for handling as HTML [HTML].
+         * If the value of "type" is "html", the content of the Text construct MUST NOT contain child elements and SHOULD be suitable for handling as HTML.
          * Any markup within MUST be escaped; for example, "<br>" as "&lt;br>".
          * HTML markup within SHOULD be such that it could validly appear directly within an HTML <DIV> element, after unescaping.
          * Atom Processors that display such content MAY use that markup to aid in its display.
@@ -33,7 +34,7 @@ data class AtomText(
         const val TYPE_HTML = "html"
 
         /**
-         * If the value of "type" is "xhtml", the content of the Text construct MUST be a single XHTML div element [XHTML] and SHOULD be suitable for handling as XHTML.
+         * If the value of "type" is "xhtml", the content of the Text construct MUST be a single XHTML div element XHTML and SHOULD be suitable for handling as XHTML.
          * The XHTML div element itself MUST NOT be considered part of the content.
          * Atom Processors that display the content MAY use the markup to aid in displaying it.
          * The escaped versions of characters such as "&" and ">" represent those characters, not markup.

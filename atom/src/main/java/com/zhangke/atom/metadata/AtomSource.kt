@@ -6,8 +6,8 @@ import com.zhangke.atom.attributes.AtomLogo
 import com.zhangke.atom.constructs.AtomDate
 import com.zhangke.atom.constructs.AtomPerson
 import com.zhangke.atom.constructs.AtomText
-import com.zhangke.atom.elements.AtomId
-import com.zhangke.atom.elements.AtomLink
+import com.zhangke.atom.attributes.AtomId
+import com.zhangke.atom.attributes.AtomLink
 
 data class AtomSource(
     val commonAttributes: AtomCommonAttributes?,

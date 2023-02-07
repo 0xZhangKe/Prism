@@ -1,8 +1,7 @@
 package com.zhangke.atom.elements
 
-import com.zhangke.atom.attributes.AtomIcon
+import com.zhangke.atom.attributes.*
 import com.zhangke.atom.attributes.AtomLogo
-import com.zhangke.atom.attributes.AtomCommonAttributes
 import com.zhangke.atom.constructs.AtomDate
 import com.zhangke.atom.constructs.AtomPerson
 import com.zhangke.atom.constructs.AtomText
@@ -43,4 +42,4 @@ data class AtomFeed(
     val title: AtomText,
     val updated: AtomDate,
     val entry: List<AtomEntry>?
-)
+): AtomElement
