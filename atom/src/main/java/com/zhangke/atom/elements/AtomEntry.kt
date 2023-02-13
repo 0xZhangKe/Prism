@@ -12,12 +12,12 @@ import com.zhangke.atom.metadata.AtomSource
 
 data class AtomEntry(
     val commonAttrs: AtomCommonAttributes?,
-    val author: List<AtomPerson>?,
+    val author: AtomPerson?,
     val category: List<AtomCategory>?,
     val content: AtomContent?,
     val contributor: List<AtomPerson>?,
     val id: AtomId,
-    val link: List<AtomLink>?,
+    val link: AtomLink?,
     val rights: AtomText?,
     val published: AtomDate?,
     val source: AtomSource?,

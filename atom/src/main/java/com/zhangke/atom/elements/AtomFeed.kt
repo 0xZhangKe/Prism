@@ -29,14 +29,14 @@ data class AtomFeed(
      * unless all of the atom:feed element's child atom:entry elements
      * contain at least one atom:author element.
      */
-    val author: List<AtomPerson>?,
+    val author: AtomPerson?,
     val category: List<AtomCategory>?,
     val contributor: List<AtomPerson>?,
     val generator: AtomGenerator?,
     val icon: AtomIcon?,
     val logo: AtomLogo?,
     val id: AtomId,
-    val link: List<AtomLink>?,
+    val link: AtomLink?,
     val rights: AtomText?,
     val subtitle: AtomText?,
     val title: AtomText,

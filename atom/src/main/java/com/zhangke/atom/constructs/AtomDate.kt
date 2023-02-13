@@ -1,8 +1,11 @@
 package com.zhangke.atom.constructs
 
+import com.google.gson.annotations.JsonAdapter
+import com.zhangke.atom.adapters.AtomDateTypeAdapter
 import com.zhangke.atom.attributes.AtomCommonAttributes
 import java.util.*
 
+@JsonAdapter(AtomDateTypeAdapter::class)
 data class AtomDate(
     val commonAttrs: AtomCommonAttributes?,
     /**
