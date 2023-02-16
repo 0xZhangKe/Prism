@@ -1,9 +1,13 @@
 package com.zhangke.atom.attributes
 
+import com.google.gson.annotations.JsonAdapter
+import com.zhangke.atom.adapters.AtomLinkAdapter
+
 /**
  * The "atom:link" element defines a reference from an entry or feed to a Web resource.
  * This specification assigns no meaning to the content (if any) of this element.
  */
+@JsonAdapter(AtomLinkAdapter::class)
 data class AtomLink(
     /**
      * The "href" attribute contains the link's IRI.
