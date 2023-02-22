@@ -5,49 +5,42 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import com.zhangke.atom.attributes.AtomCommonAttributes
-import com.zhangke.atom.constructs.AtomDate
-import java.util.*
+import com.zhangke.atom.attributes.AtomIcon
+import com.zhangke.atom.attributes.AtomId
+import com.zhangke.atom.attributes.AtomLogo
 
-internal class AtomDateTypeAdapter : TypeAdapter<AtomDate>() {
+class AtomLogoAdapter : TypeAdapter<AtomLogo>() {
 
-    override fun write(out: JsonWriter, value: AtomDate) {
+    override fun write(out: JsonWriter, value: AtomLogo) {
         with(out) {
             if (value.hasCommonAttributes()) {
-                // OBJECT mode
                 beginObject()
                 value.writeCommonAttributes()
-                if (value.dateTime != null) {
-                    RFC3339Format.fromDate(value.dateTime).writeSelfWith("dateTime")
-                }
+                value.uri.writeSelfWith("uri")
                 endObject()
-            } else if (value.dateTime != null) {
-                out.value(RFC3339Format.fromDate(value.dateTime))
             } else {
-                null
+                out.value(value.uri)
             }
         }
     }
 
-    override fun read(input: JsonReader): AtomDate {
+    override fun read(input: JsonReader): AtomLogo {
         var commonAttributes: AtomCommonAttributes? = null
-        var dateTime: Date? = null
+        var uri = ""
         if (input.peek() == JsonToken.BEGIN_OBJECT) {
             commonAttributes = input.readCommon { name, reader ->
                 when (name) {
-                    "dateTime" -> {
-                        dateTime = Date(reader.nextLong())
-                    }
-
+                    "uri" -> uri = reader.nextString()
                     else -> reader.skipValue()
                 }
             }
         } else {
-            dateTime = RFC3339Format.toDate(input.nextString())
+            uri = input.nextString()
         }
-        return AtomDate(
+        return AtomLogo(
             base = commonAttributes?.base,
             lang = commonAttributes?.lang,
-            dateTime
+            uri = uri
         )
     }
 }

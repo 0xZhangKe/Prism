@@ -23,7 +23,8 @@ import com.zhangke.atom.metadata.AtomGenerator
  * latest atom:updated timestamp.
  */
 data class AtomFeed(
-    val commonAttrs: AtomCommonAttributes?,
+    override val base: String?,
+    override val lang: String?,
     /**
      * atom:feed elements MUST contain one or more atom:author elements,
      * unless all of the atom:feed element's child atom:entry elements
@@ -42,4 +43,4 @@ data class AtomFeed(
     val title: AtomText,
     val updated: AtomDate,
     val entry: List<AtomEntry>?
-): AtomElement
+) : AtomElement, AtomCommonAttributes

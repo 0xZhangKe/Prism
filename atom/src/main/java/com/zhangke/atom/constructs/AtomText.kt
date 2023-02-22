@@ -7,11 +7,12 @@ import com.zhangke.atom.attributes.AtomCommonAttributes
  * The content of Text constructs is Language-Sensitive.
  */
 data class AtomText(
-    val commonAttrs : AtomCommonAttributes?,
+    override val base: String?,
+    override val lang: String?,
     val type: String = TYPE_TEXT,
     val text: String?,
     val xhtmlDiv: String?,
-) {
+): AtomCommonAttributes {
 
     companion object {
         /**

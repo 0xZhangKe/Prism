@@ -7,7 +7,8 @@ import com.zhangke.atom.attributes.AtomCommonAttributes
  * This specification assigns no meaning to the content (if any) of this element.
  */
 data class AtomCategory(
-    val commonAttrs: AtomCommonAttributes?,
+    override val base: String?,
+    override val lang: String?,
     /**
      * The "term" attribute is a string that identifies the category to which the entry or feed belongs.
      * Category elements MUST have a "term" attribute.
@@ -25,4 +26,4 @@ data class AtomCategory(
      * Category elements MAY have a "label" attribute.
      */
     val label: String?
-)
+) : AtomCommonAttributes

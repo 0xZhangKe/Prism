@@ -1,5 +1,0 @@
-
----------HomePage------------
-bUser(name=zhangke, homepage=Homepage(title=Title, link=Link(baseUrl=www.zhangke.com, url=/blog)))
-c{"name":"zhangke","homepage":{"title":"Title","link":{"baseUrl":"www.zhangke.com","url":"/blog"}}}
----------HomePage------------

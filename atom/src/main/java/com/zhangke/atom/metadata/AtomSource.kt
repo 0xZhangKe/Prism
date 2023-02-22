@@ -10,7 +10,8 @@ import com.zhangke.atom.attributes.AtomId
 import com.zhangke.atom.attributes.AtomLink
 
 data class AtomSource(
-    val commonAttributes: AtomCommonAttributes?,
+    override val base: String?,
+    override val lang: String?,
     val author: List<AtomPerson>?,
     val category: List<AtomCategory>?,
     val contributor: List<AtomPerson>?,
@@ -23,4 +24,4 @@ data class AtomSource(
     val subtitle: AtomText?,
     val title: AtomText?,
     val updated: AtomDate?,
-)
+) : AtomCommonAttributes

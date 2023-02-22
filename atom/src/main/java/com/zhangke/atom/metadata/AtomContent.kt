@@ -4,8 +4,10 @@ import com.google.gson.TypeAdapter
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
+import com.zhangke.atom.adapters.readCommon
+import com.zhangke.atom.adapters.writeCommonAttributes
+import com.zhangke.atom.adapters.writeSelfWith
 import com.zhangke.atom.attributes.AtomCommonAttributes
-import com.zhangke.atom.adapters.AtomCommonAttributesAdapter
 import com.zhangke.atom.constructs.AtomText
 
 /**
@@ -20,34 +22,42 @@ import com.zhangke.atom.constructs.AtomText
  * the type attribute were present with a value of "text".
  */
 @JsonAdapter(AtomContentJsonAdapter::class)
-sealed class AtomContent {
+sealed class AtomContent(
+    override val base: String?,
+    override val lang: String?
+) : AtomCommonAttributes {
 
     data class InlineTextContent(
-        val commonAttributes: AtomCommonAttributes?,
+        override val base: String?,
+        override val lang: String?,
         val text: String,
-    ) : AtomContent()
+    ) : AtomContent(base, lang)
 
     data class InlineHtmlContent(
-        val commonAttributes: AtomCommonAttributes?,
+        override val base: String?,
+        override val lang: String?,
         val html: String,
-    ) : AtomContent()
+    ) : AtomContent(base, lang)
 
     data class InlineXHTMLContent(
-        val commonAttributes: AtomCommonAttributes?,
+        override val base: String?,
+        override val lang: String?,
         val xhtmlDiv: String
-    ) : AtomContent()
+    ) : AtomContent(base, lang)
 
     data class InlineOtherContent(
-        val commonAttributes: AtomCommonAttributes?,
+        override val base: String?,
+        override val lang: String?,
         val text: String,
         val mimeType: String?,
-    ) : AtomContent()
+    ) : AtomContent(base, lang)
 
     data class MediaContent(
-        val commonAttributes: AtomCommonAttributes?,
+        override val base: String?,
+        override val lang: String?,
         val src: String,
         val mimeType: String?,
-    ) : AtomContent()
+    ) : AtomContent(base, lang)
 
     companion object {
 
@@ -61,13 +71,38 @@ sealed class AtomContent {
             return when {
                 type == AtomText.TYPE_TEXT || (type == null && src == null) -> {
                     // is text type
-                    InlineTextContent(commonAttributes, text.orEmpty())
+                    InlineTextContent(
+                        base = commonAttributes?.base,
+                        lang = commonAttributes?.lang,
+                        text.orEmpty()
+                    )
                 }
 
-                type == AtomText.TYPE_HTML -> InlineHtmlContent(commonAttributes, text.orEmpty())
-                type == AtomText.TYPE_XHTML -> InlineXHTMLContent(commonAttributes, xhtml.orEmpty())
-                src != null -> MediaContent(commonAttributes, src, type)
-                else -> InlineOtherContent(commonAttributes, text.orEmpty(), type)
+                type == AtomText.TYPE_HTML -> InlineHtmlContent(
+                    base = commonAttributes?.base,
+                    lang = commonAttributes?.lang,
+                    text.orEmpty()
+                )
+
+                type == AtomText.TYPE_XHTML -> InlineXHTMLContent(
+                    base = commonAttributes?.base,
+                    lang = commonAttributes?.lang,
+                    xhtml.orEmpty()
+                )
+
+                src != null -> MediaContent(
+                    base = commonAttributes?.base,
+                    lang = commonAttributes?.lang,
+                    src,
+                    type
+                )
+
+                else -> InlineOtherContent(
+                    base = commonAttributes?.base,
+                    lang = commonAttributes?.lang,
+                    text.orEmpty(),
+                    type
+                )
             }
         }
     }
@@ -75,48 +110,42 @@ sealed class AtomContent {
 
 internal class AtomContentJsonAdapter : TypeAdapter<AtomContent>() {
 
-    private val commonAttributesAdapter = AtomCommonAttributesAdapter()
-
     override fun write(out: JsonWriter, value: AtomContent) {
-        out.beginObject()
+        with(out) {
+            beginObject()
+            when (value) {
+                is AtomContent.InlineTextContent -> {
+                    value.writeCommonAttributes()
+                    value.text.writeSelfWith("text")
+                    AtomText.TYPE_TEXT.writeSelfWith("type")
+                }
 
-        when (value) {
-            is AtomContent.InlineTextContent -> {
-                value.commonAttributes?.writeCommonAttributes(out)
-                out.name("text").value(value.text)
-                out.name("type").value(AtomText.TYPE_TEXT)
-            }
+                is AtomContent.InlineHtmlContent -> {
+                    value.writeCommonAttributes()
+                    value.html.writeSelfWith("text")
+                    AtomText.TYPE_HTML.writeSelfWith("type")
+                }
 
-            is AtomContent.InlineHtmlContent -> {
-                value.commonAttributes?.writeCommonAttributes(out)
-                out.name("text").value(value.html)
-                out.name("type").value(AtomText.TYPE_HTML)
-            }
+                is AtomContent.InlineXHTMLContent -> {
+                    value.writeCommonAttributes()
+                    value.xhtmlDiv.writeSelfWith("xhtmlDiv")
+                    AtomText.TYPE_XHTML.writeSelfWith("type")
+                }
 
-            is AtomContent.InlineXHTMLContent -> {
-                value.commonAttributes?.writeCommonAttributes(out)
-                out.name("xhtmlDiv").value(value.xhtmlDiv)
-                out.name("type").value(AtomText.TYPE_XHTML)
-            }
+                is AtomContent.InlineOtherContent -> {
+                    value.writeCommonAttributes()
+                    value.text.writeSelfWith("text")
+                    value.mimeType?.writeSelfWith("type")
+                }
 
-            is AtomContent.InlineOtherContent -> {
-                value.commonAttributes?.writeCommonAttributes(out)
-                out.name("text").value(value.text)
-                out.name("type").value(value.mimeType)
+                is AtomContent.MediaContent -> {
+                    value.writeCommonAttributes()
+                    value.src.writeSelfWith("src")
+                    value.mimeType?.writeSelfWith("type")
+                }
             }
-
-            is AtomContent.MediaContent -> {
-                value.commonAttributes?.writeCommonAttributes(out)
-                out.name("src").value(value.src)
-                out.name("type").value(value.mimeType)
-            }
+            out.endObject()
         }
-        out.endObject()
-    }
-
-    private fun AtomCommonAttributes.writeCommonAttributes(writer: JsonWriter) {
-        writer.name(AtomCommonAttributesAdapter.COMMON_KEY)
-        commonAttributesAdapter.write(writer, this)
     }
 
     override fun read(reader: JsonReader): AtomContent {
@@ -125,13 +154,8 @@ internal class AtomContentJsonAdapter : TypeAdapter<AtomContent>() {
         var src: String? = null
         var text: String? = null
         var xhtmlDiv: String? = null
-        reader.beginObject()
-        while (reader.hasNext()) {
-            when (reader.nextName()) {
-                AtomCommonAttributesAdapter.COMMON_KEY -> {
-                    commonAttributes = commonAttributesAdapter.read(reader)
-                }
-
+        commonAttributes = reader.readCommon { name, _ ->
+            when (name) {
                 "type" -> {
                     type = reader.nextString()
                 }
@@ -151,7 +175,6 @@ internal class AtomContentJsonAdapter : TypeAdapter<AtomContent>() {
                 else -> reader.skipValue()
             }
         }
-        reader.endObject()
         return dealContent(commonAttributes, type, src, text, xhtmlDiv)
     }
 

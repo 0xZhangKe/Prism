@@ -11,7 +11,8 @@ import com.zhangke.atom.metadata.AtomContent
 import com.zhangke.atom.metadata.AtomSource
 
 data class AtomEntry(
-    val commonAttrs: AtomCommonAttributes?,
+    override val base: String?,
+    override val lang: String?,
     val author: AtomPerson?,
     val category: List<AtomCategory>?,
     val content: AtomContent?,
@@ -24,4 +25,4 @@ data class AtomEntry(
     val summary: AtomText?,
     val title: AtomText,
     val updated: AtomDate,
-) : AtomElement
+) : AtomElement, AtomCommonAttributes

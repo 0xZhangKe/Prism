@@ -32,10 +32,12 @@ repositories {
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
     }
 }
 compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
     }
 }
