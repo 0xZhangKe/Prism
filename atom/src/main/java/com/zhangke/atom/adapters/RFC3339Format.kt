@@ -7,7 +7,7 @@ import java.util.*
 object RFC3339Format {
 
     private val formatLocal = ThreadLocal.withInitial {
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX'Z'")
     }
 
     private val format: DateFormat get() = formatLocal.get()

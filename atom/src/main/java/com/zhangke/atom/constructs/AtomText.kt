@@ -1,11 +1,14 @@
 package com.zhangke.atom.constructs
 
+import com.google.gson.annotations.JsonAdapter
+import com.zhangke.atom.adapters.AtomTextAdapter
 import com.zhangke.atom.attributes.AtomCommonAttributes
 
 /**
  * A Text construct contains human-readable text, usually in small quantities.
  * The content of Text constructs is Language-Sensitive.
  */
+@JsonAdapter(AtomTextAdapter::class)
 data class AtomText(
     override val base: String?,
     override val lang: String?,

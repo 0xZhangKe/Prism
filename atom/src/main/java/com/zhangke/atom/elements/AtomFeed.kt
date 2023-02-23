@@ -1,5 +1,9 @@
 package com.zhangke.atom.elements
 
+import com.google.gson.annotations.JsonAdapter
+import com.zhangke.atom.adapters.AtomCategoryListAdapter
+import com.zhangke.atom.adapters.AtomLinkListAdapter
+import com.zhangke.atom.adapters.AtomPersonListAdapter
 import com.zhangke.atom.attributes.*
 import com.zhangke.atom.attributes.AtomLogo
 import com.zhangke.atom.constructs.AtomDate
@@ -30,14 +34,18 @@ data class AtomFeed(
      * unless all of the atom:feed element's child atom:entry elements
      * contain at least one atom:author element.
      */
-    val author: AtomPerson?,
+    @JsonAdapter(AtomPersonListAdapter::class)
+    val author: List<AtomPerson>?,
+    @JsonAdapter(AtomCategoryListAdapter::class)
     val category: List<AtomCategory>?,
+    @JsonAdapter(AtomPersonListAdapter::class)
     val contributor: List<AtomPerson>?,
     val generator: AtomGenerator?,
     val icon: AtomIcon?,
     val logo: AtomLogo?,
     val id: AtomId,
-    val link: AtomLink?,
+    @JsonAdapter(AtomLinkListAdapter::class)
+    val link: List<AtomLink>?,
     val rights: AtomText?,
     val subtitle: AtomText?,
     val title: AtomText,

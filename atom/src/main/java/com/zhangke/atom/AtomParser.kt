@@ -16,7 +16,12 @@ class AtomParser {
             ?.takeIf { it.isJsonObject }
             ?.asJsonObject
             ?: return null
-        return gson.fromJson(feedJson, AtomFeed::class.java)
+        return try {
+            gson.fromJson(feedJson, AtomFeed::class.java)
+        } catch (e: Exception) {
+            println(feedJson)
+            throw e
+        }
     }
 
     private fun xmlToJsonObject(xml: String): JsonObject? {

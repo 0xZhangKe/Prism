@@ -16,5 +16,5 @@ data class AtomGenerator(
     /**
      * The atom:generator element MAY have a "version" attribute that indicates the version of the generating agent.
      */
-    val version: Int,
+    val version: String,
 ) : AtomCommonAttributes

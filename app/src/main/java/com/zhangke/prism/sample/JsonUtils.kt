@@ -1,4 +1,5 @@
 package com.zhangke.prism.sample
 
-class JsonUtils {
-}
+import com.google.gson.Gson
+
+val gson = Gson()

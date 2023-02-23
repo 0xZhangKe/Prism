@@ -1,4 +1,4 @@
-package com.zhangke.prism.sample
+package com.zhangke.prism.sample.utils
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

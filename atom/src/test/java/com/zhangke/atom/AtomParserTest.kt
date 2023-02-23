@@ -44,12 +44,9 @@ class AtomParserTest {
 
     @Test
     fun printAllElement() {
-//        val xmlDocList = collectXmlDocuments()
-        runBlocking {
-            fetchAtomDoc().collect {
-                val element = atomParser.parse(it)
-                println(element)
-            }
+        val parser = AtomParser()
+        collectAllDocuments().forEach { doc ->
+            println(parser.parse(doc))
         }
     }
 
@@ -58,24 +55,8 @@ class AtomParserTest {
         println(atomParser.parse(testFile.readText()))
     }
 
-    private fun fetchAtomDoc(): Flow<String> {
-        val urlList = SourceHelper().readAllAtomSource().take(10)
-        return flow {
-            urlList.forEach {
-                val result = HttpUtil.get(it)
-                if (!result.isNullOrEmpty()) {
-                    emit(result)
-                }
-            }
-        }
-    }
-
-    private fun collectXmlDocuments(): List<String> {
-        val urlList = SourceHelper().readAllAtomSource().take(1)
-        return runBlocking {
-            urlList.map {
-                async { HttpUtil.get(it) }
-            }.awaitAll()
-        }.filter { !it.isNullOrEmpty() }.map { it!! }
+    private fun collectAllDocuments(): List<String> {
+        val repoDir = DocRepoHelper().getAtomRepoDir()
+        return repoDir.listFiles()?.map { it.readText() } ?: emptyList()
     }
 }

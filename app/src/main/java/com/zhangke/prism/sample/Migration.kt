@@ -1,8 +1,8 @@
-package com.zhangke.atom
+package com.zhangke.prism.sample
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.zhangke.atom.util.HttpUtil
+import com.zhangke.prism.sample.utils.HttpUtil
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
@@ -15,6 +15,9 @@ import javax.xml.parsers.DocumentBuilderFactory
 private const val SRC_FILE_PATH = "/Users/zhangke/Downloads/InoreaderFeeds.xml"
 internal const val URL_FILE_PATH = "UrlList.json"
 
+/**
+ * Migration [SRC_FILE_PATH] source to [URL_FILE_PATH]
+ */
 fun main() {
     val sourceFile = File(SRC_FILE_PATH)
     val doc = DocumentBuilderFactory.newInstance()

@@ -1,4 +1,4 @@
-package com.zhangke.framework.security
+package com.zhangke.prism.sample.utils
 
 import java.math.BigInteger
 import java.security.MessageDigest
