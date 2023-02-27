@@ -15,12 +15,7 @@ internal fun AtomCommonAttributes.writeCommonAttributes() {
     base?.writeSelfWith("base")
 }
 
-//internal fun JsonReader.readCommonAttributes(): AtomCommonAttributes? {
-//    val lang =
-//    return commonAttributesAdapter.read(this)
-//}
-
-internal fun JsonReader.readCommon(block: (name: String, reade: JsonReader) -> Unit): AtomCommonAttributes? {
+internal fun JsonReader.readCommon(block: (name: String, reader: JsonReader) -> Unit): AtomCommonAttributes? {
     var base: String? = null
     var lang: String? = null
     readALL { name, reader ->

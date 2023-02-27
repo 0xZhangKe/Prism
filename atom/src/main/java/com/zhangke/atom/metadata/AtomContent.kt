@@ -28,36 +28,31 @@ sealed class AtomContent(
 ) : AtomCommonAttributes {
 
     data class InlineTextContent(
-        override val base: String?,
-        override val lang: String?,
+        private val commonAttributes: AtomCommonAttributes?,
         val text: String,
-    ) : AtomContent(base, lang)
+    ) : AtomContent(commonAttributes?.base, commonAttributes?.lang)
 
     data class InlineHtmlContent(
-        override val base: String?,
-        override val lang: String?,
+        private val commonAttributes: AtomCommonAttributes?,
         val html: String,
-    ) : AtomContent(base, lang)
+    ) : AtomContent(commonAttributes?.base, commonAttributes?.lang)
 
     data class InlineXHTMLContent(
-        override val base: String?,
-        override val lang: String?,
+        private val commonAttributes: AtomCommonAttributes?,
         val xhtmlDiv: String
-    ) : AtomContent(base, lang)
+    ) : AtomContent(commonAttributes?.base, commonAttributes?.lang)
 
     data class InlineOtherContent(
-        override val base: String?,
-        override val lang: String?,
+        private val commonAttributes: AtomCommonAttributes?,
         val text: String,
         val mimeType: String?,
-    ) : AtomContent(base, lang)
+    ) : AtomContent(commonAttributes?.base, commonAttributes?.lang)
 
     data class MediaContent(
-        override val base: String?,
-        override val lang: String?,
+        private val commonAttributes: AtomCommonAttributes?,
         val src: String,
         val mimeType: String?,
-    ) : AtomContent(base, lang)
+    ) : AtomContent(commonAttributes?.base, commonAttributes?.lang)
 
     companion object {
 
@@ -72,34 +67,29 @@ sealed class AtomContent(
                 type == AtomText.TYPE_TEXT || (type == null && src == null) -> {
                     // is text type
                     InlineTextContent(
-                        base = commonAttributes?.base,
-                        lang = commonAttributes?.lang,
+                        commonAttributes = commonAttributes,
                         text.orEmpty()
                     )
                 }
 
                 type == AtomText.TYPE_HTML -> InlineHtmlContent(
-                    base = commonAttributes?.base,
-                    lang = commonAttributes?.lang,
+                    commonAttributes = commonAttributes,
                     text.orEmpty()
                 )
 
                 type == AtomText.TYPE_XHTML -> InlineXHTMLContent(
-                    base = commonAttributes?.base,
-                    lang = commonAttributes?.lang,
+                    commonAttributes = commonAttributes,
                     xhtml.orEmpty()
                 )
 
                 src != null -> MediaContent(
-                    base = commonAttributes?.base,
-                    lang = commonAttributes?.lang,
+                    commonAttributes = commonAttributes,
                     src,
                     type
                 )
 
                 else -> InlineOtherContent(
-                    base = commonAttributes?.base,
-                    lang = commonAttributes?.lang,
+                    commonAttributes = commonAttributes,
                     text.orEmpty(),
                     type
                 )

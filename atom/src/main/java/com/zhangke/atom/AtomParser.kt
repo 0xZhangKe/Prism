@@ -11,25 +11,13 @@ class AtomParser {
     private val gson: Gson get() = AtomConfig.gson
 
     fun parse(xml: String): AtomElement? {
-        val jsonObject = xmlToJsonObject(xml) ?: return null
-        val feedJson = jsonObject.get("feed")
-            ?.takeIf { it.isJsonObject }
-            ?.asJsonObject
-            ?: return null
-        return try {
-            gson.fromJson(feedJson, AtomFeed::class.java)
-        } catch (e: Exception) {
-            println(feedJson)
-            throw e
-        }
+        val jsonObject = xmlToJsonObject(xml)
+        val feedJson = jsonObject.get("feed").asJsonObject
+        return gson.fromJson(feedJson, AtomFeed::class.java)
     }
 
-    private fun xmlToJsonObject(xml: String): JsonObject? {
-        return try {
-            val jsonString = XML.toJSONObject(xml).toString()
-            gson.fromJson(jsonString, JsonObject::class.java)
-        } catch (e: Exception) {
-            null
-        }
+    private fun xmlToJsonObject(xml: String): JsonObject {
+        val jsonString = XML.toJSONObject(xml).toString()
+        return gson.fromJson(jsonString, JsonObject::class.java)
     }
 }

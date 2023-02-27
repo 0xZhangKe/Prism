@@ -11,10 +11,12 @@ class AtomTextAdapter : TypeAdapter<AtomText>() {
 
     override fun write(out: JsonWriter, value: AtomText) {
         with(out) {
+            beginObject()
             value.writeCommonAttributes()
             value.type.writeSelfWith("type")
             value.text?.writeSelfWith("text")
             value.xhtmlDiv?.writeSelfWith("xhtmlDiv")
+            endObject()
         }
     }
 

@@ -17,7 +17,7 @@ internal class AtomDateTypeAdapter : TypeAdapter<AtomDate>() {
                 beginObject()
                 value.writeCommonAttributes()
                 if (value.dateTime != null) {
-                    RFC3339Format.fromDate(value.dateTime).writeSelfWith("dateTime")
+                    AtomDateParser.fromDate(value.dateTime).writeSelfWith("dateTime")
                 }
                 endObject()
             } else if (value.dateTime != null) {
@@ -42,7 +42,7 @@ internal class AtomDateTypeAdapter : TypeAdapter<AtomDate>() {
                 }
             }
         } else {
-            dateTime = RFC3339Format.toDate(input.nextString())
+            dateTime = AtomDateParser.toDate(input.nextString())
         }
         return AtomDate(
             base = commonAttributes?.base,
