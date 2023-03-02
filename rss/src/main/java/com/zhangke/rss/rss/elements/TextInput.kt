@@ -1,4 +1,4 @@
-package com.zhangke.rss.elements
+package com.zhangke.rss.rss.elements
 
 /**
  * A channel may optionally contain a <textInput> sub-element, which contains four required sub-elements.

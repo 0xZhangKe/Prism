@@ -1,4 +1,4 @@
-package com.zhangke.rss.elements
+package com.zhangke.rss.rss.elements
 
 /**
  * The channel's skipDays element identifies days of the week during which the feed is not updated (OPTIONAL).

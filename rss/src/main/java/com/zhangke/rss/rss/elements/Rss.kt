@@ -1,4 +1,4 @@
-package com.zhangke.rss.elements
+package com.zhangke.rss.rss.elements
 
 /**
  * The rss element is the top-level element of an RSS feed.

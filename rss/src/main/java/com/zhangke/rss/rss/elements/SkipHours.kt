@@ -1,4 +1,4 @@
-package com.zhangke.rss.elements
+package com.zhangke.rss.rss.elements
 
 /**
  * The channel's skipHours element identifies the hours of the day during which the feed is not updated (OPTIONAL).

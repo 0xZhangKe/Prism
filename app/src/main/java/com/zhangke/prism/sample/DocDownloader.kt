@@ -8,7 +8,8 @@ import kotlinx.coroutines.runBlocking
 import java.io.File
 
 fun main() {
-    downloadAtoms()
+//    downloadAtoms()
+    downloadRss()
 }
 
 /**
@@ -23,6 +24,19 @@ private fun downloadAtoms() {
     runBlocking {
         atomUrlList.map { url ->
             async { downloadFile(url, atomRepoDir) }
+        }.awaitAll()
+    }
+}
+
+private fun downloadRss(){
+    val rssRepoDir = getRssRepoDir()
+    if (!rssRepoDir.exists()){
+        rssRepoDir.mkdirs()
+    }
+    val rssUrlList = SourceHelper().readAllRssSource()
+    runBlocking {
+        rssUrlList.map { url ->
+            async { downloadFile(url, rssRepoDir) }
         }.awaitAll()
     }
 }

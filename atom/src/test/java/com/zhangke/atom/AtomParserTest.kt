@@ -1,6 +1,11 @@
 package com.zhangke.atom
 
+import com.rometools.rome.io.SyndFeedInput
 import com.zhangke.atom.util.gson
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -38,5 +43,36 @@ class AtomParserTest {
     private fun collectAllDocuments(): List<String> {
         val repoDir = DocRepoHelper().getAtomRepoDir()
         return repoDir.listFiles()?.map { it.readText() } ?: emptyList()
+    }
+
+    @Test
+    fun parse() {
+        runBlocking {
+            getAtomDocFlow().collect { docFile ->
+//                println(rssParser.parse(doc))
+                try {
+                    val feed = SyndFeedInput().build(docFile)
+                    println(feed)
+                } catch (e: Exception) {
+                    println("---------START---------")
+                    println("---------START---------")
+                    println("---------START---------")
+                    println(docFile.absolutePath)
+                    println(docFile.readText())
+                    println("---------END---------")
+                    println("---------END---------")
+                    println("---------END---------")
+                }
+            }
+        }
+    }
+
+    private fun getAtomDocFlow(): Flow<File> {
+        val dir = DocRepoHelper().getAtomRepoDir()
+        return flow {
+            dir.listFiles()?.forEach { docFile ->
+                emit(docFile)
+            }
+        }
     }
 }

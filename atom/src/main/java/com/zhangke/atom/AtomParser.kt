@@ -8,9 +8,9 @@ import org.json.XML
 
 class AtomParser {
 
-    private val gson: Gson get() = AtomConfig.gson
+    private val gson: Gson get() = AtomParserConfig.gson
 
-    fun parse(xml: String): AtomElement? {
+    fun parse(xml: String): AtomElement {
         val jsonObject = xmlToJsonObject(xml)
         val feedJson = jsonObject.get("feed").asJsonObject
         return gson.fromJson(feedJson, AtomFeed::class.java)

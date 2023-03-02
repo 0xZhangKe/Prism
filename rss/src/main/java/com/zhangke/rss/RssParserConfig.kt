@@ -1,8 +1,8 @@
-package com.zhangke.atom
+package com.zhangke.rss
 
 import com.google.gson.Gson
 
-object AtomConfig {
+object RssParserConfig {
 
     var gson: Gson by LazyBackingFieldDelegate(::Gson)
 

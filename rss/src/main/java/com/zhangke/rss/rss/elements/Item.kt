@@ -1,4 +1,4 @@
-package com.zhangke.rss.elements
+package com.zhangke.rss.rss.elements
 
 /**
  * A channel may contain any number of <item>s.
